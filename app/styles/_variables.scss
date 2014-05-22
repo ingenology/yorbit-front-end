@@ -1,0 +1,61 @@
+/* #Variables
+================================================== */
+
+// COLORS
+$blue: #414f65;
+$darkblue: #13171d;
+$darkgrey: #1a1e25;
+$lightblue: #bccfe9;
+$grey: #3e4958;
+$green: #1daf95;
+
+@mixin sourcesans($weight: 400) {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: $weight;
+}
+
+// MIXINS
+@mixin transition($target: all, $time: 0.4s, $ease: ease) {
+	-webkit-transition: $target $time $ease;
+	-moz-transition: $target $time $ease;
+	-ms-transition: $target $time $ease;
+	-o-transition: $target $time $ease;
+	transition: $target $time $ease;
+}
+
+@mixin border-radius($size) {
+	-webkit-border-radius: $size;
+	-moz-border-radius: $size;
+	-ms-border-radius: $size;
+	-o-border-radius: $size;
+	border-radius: $size;
+}
+
+@mixin rotate($amount) {
+	-ms-transform: rotate($amount);
+	-webkit-transform: rotate($amount);
+	transform: rotate($amount);
+}
+
+@mixin clearfix {
+	&:before, &:after {
+		display: table;
+		line-height: 0;
+		content: "";
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin retina($file, $type, $width: auto, $height: auto) {
+	background-image: url('/images/' + $file + '.' + $type);
+
+	@media all and (-webkit-min-device-pixel-ratio: 1.5), (-moz-min-device-pixel-ratio: 1.5) {
+		& {
+		  background-image: url('/images/' + $file + '@2x.' + $type);
+		  -webkit-background-size: $width $height;
+		  background-size: $width $height;
+		}
+	}
+}
