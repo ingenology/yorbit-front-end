@@ -4,7 +4,7 @@
 .modal {
 	position: relative;
 	padding: 40px;
-	height: 470px;
+	//height: 470px;
 	top: 29px;
 	background: $darkblue;
 	display: block !important;
@@ -19,6 +19,14 @@
 		a {
 			color: $blue;
 		}
+	}
+	label {
+		display: block;
+
+		@include sourcesans(400);
+		color: $blue;
+		font-size: 30px;
+		margin-bottom: 10px;
 	}
 	input[type="text"], input[type="email"], input[type="password"] {
 		display: block;
@@ -191,32 +199,160 @@
 	margin: 30px 0;
 	background-color: $darkblue;
 
-	.containerDiv {
+	.map-holder {
 		position: absolute;
 		width: 625px;
 		height: 100%;
 		overflow: hidden;
+		left: 0;
+		top: 0;
+		background-color: black;
 
-		.map-holder {
+		#map {
 			position: absolute;
-			width: 625px;
 			height: 100%;
+			width: 100%;
 			left: 0;
 			top: 0;
-			background-color: black;
+			overflow: hidden;
+		}
+		#map-content {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 1000;
+			background: none;
+			display: none;
 
-			//FOR DEV ONLY
-			//@include retina(sample-map, jpg, 625px, 625px);
-			//background-repeat: no-repeat;
+			.background {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				top: 0;
+				background-color: rgba(255,255,255,0.1);
+			}
+			.text-item {
+				position: absolute;
+				display: inline;
+				width: auto;
+				padding: 1px;
+				cursor: all-scroll;
+				z-index: 100;
+
+				@include sourcesans(400);
+				color: red;
+				font-size: 60px;
+
+				.delete {
+					position: absolute;
+					height: 30px;
+					width: 30px;
+					left: -20px;
+					top: -20px;
+					display: none;
+					cursor: pointer;
+
+					@include retina(close, png, 30px, 30px);
+					@include transition(opacity, 0.2s);
+
+					&:hover {
+						opacity: 0.8;
+					}
+				}
+				&.active {
+					//cursor: all-scroll;
+					border: 1px solid $lightblue;
+					padding: 0;
+				}
+				&:hover {
+
+					.delete {
+						display: block;
+					}
+				}
+			}
+			.square-item, .circle-item {
+				position: absolute;
+				display: inline;
+				height: 100px;
+				width: 100px;
+				padding: 1px;
+				cursor: all-scroll;
+				z-index: 100;
+
+				.delete {
+					position: absolute;
+					height: 30px;
+					width: 30px;
+					left: -20px;
+					top: -20px;
+					display: none;
+					cursor: pointer;
+
+					@include retina(close, png, 30px, 30px);
+					@include transition(opacity, 0.2s);
+
+					&:hover {
+						opacity: 0.8;
+					}
+				}
+				&.active {
+					//cursor: all-scroll;
+					border: 1px solid $lightblue;
+					padding: 0;
+				}
+				&:hover {
+
+					.delete {
+						display: block;
+					}
+				}
+			}
+			.circle-item {
+				@include border-radius(50px);
+			}
+			.pattern {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				left: 0;
+				opacity: 0;
+
+				background-position: center center;
+				background-repeat: repeat;
+
+				&.circles {
+					@include retina(pattern_circles, png, 50px, 50px);
+				}
+				&.squares {
+					@include retina(pattern_squares, png, 50px, 50px);
+				}
+				&.stripes {
+					@include retina(pattern_stripes, png, 50px, 50px);
+				}
+			}
 		}
-		.messageSpan {
-			font-family: 'Source Sans Pro', 'Helvetica', Arial, sans-serif;
-			cursor: move;
+		#map-cover {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 2000;
+			background: none;
 		}
-		.mapDiv.view {
-			width:625px;
-			height:625px;
-		}
+	}
+	.messageSpan {
+		font-family: 'Source Sans Pro', 'Helvetica', Arial, sans-serif;
+		cursor: move;
+	}
+	.mapDiv.view {
+		width:625px;
+		height:625px;
 	}
 	.tools {
 		position: absolute;
@@ -294,6 +430,7 @@
 				}
 			}
 			&.type {
+				//height: 330px;
 
 				.title {
 					@include retina(icon_type, png, 23px, 22px);
@@ -303,6 +440,9 @@
 
 					.title {
 						@include retina(icon_type_active, png, 23px, 22px);
+					}
+					.content {
+						height: 330px;
 					}
 				}
 				.content {
@@ -346,6 +486,23 @@
 						position: relative;
 						padding-bottom: 25px;
 
+						select.font-select {
+							position: relative;
+							width: 195px;
+							float: left;
+
+							padding: 11px 17px;
+							height: 36px;
+							font-size: 17px;
+							margin-bottom: 8px;
+							color: $green;
+							background-color: $darkgrey;
+							border: 2px solid $blue;
+							@include border-radius(4px);
+							line-height: 1.42857;
+							outline: 0;
+							cursor: pointer;
+						}
 						.button-group {
 							position: relative;
 							width: 195px;
@@ -405,7 +562,33 @@
 							height: 34px;
 							@include border-radius(4px);
 
-							background-color: magenta;
+							//background-color: red;
+						}
+						.color-picker {
+							position: relative;
+							float: right;
+							width: 87px;
+							height: 36px;
+							border: 0;
+							padding: 0;
+							@include border-radius(4px);
+
+							.sp-dd {
+								display: none;
+							}
+							.sp-preview {
+								height: auto;
+								width: auto;
+								padding: 18px 12px;
+								border: 0;
+								float: none;
+								margin-right: 0;
+
+								@include border-radius(8px);
+							}
+							&:hover {
+								background-color: transparent;
+							}
 						}
 						@include clearfix;
 					}
@@ -417,6 +600,7 @@
 					}
 					.row4 {
 						position: relative;
+						padding-bottom: 10px;
 						width: 100%;
 
 						textarea {
@@ -447,7 +631,7 @@
 						.button {
 							position: relative;
 							float: right;
-							padding: 8px 15px;
+							padding: 12px 14px;
 							margin-top: 10px;
 							border: 1px solid $blue;
 							@include border-radius(4px);
@@ -463,6 +647,30 @@
 							}
 						}
 						@include clearfix;
+					}
+					.row5 {
+						position: relative;
+						width: 100%;
+
+						.button {
+							position: relative;
+							float: right;
+							padding: 8px 15px;
+							margin-top: 10px;
+							border: 1px solid $blue;
+							@include border-radius(4px);
+							cursor: pointer;
+
+							@include sourcesans(600);
+							text-transform: uppercase;
+							font-size: 18px;
+							color: $blue;
+
+							&:hover {
+								background-color: $blue;
+								color: $darkgrey;
+							}
+						}
 					}
 				}
 			}
@@ -530,9 +738,27 @@
 									margin-bottom: 0;
 								}
 								&.color-picker {
-									padding: 18px 12px;
+									padding: 0;
 									border: none;
-									background-color: magenta;
+									//background-color: red;
+									display: block;
+
+									.sp-dd {
+										display: none;
+									}
+									.sp-preview {
+										height: auto;
+										width: auto;
+										padding: 18px 12px;
+										border: 0;
+										float: none;
+										margin-right: 0;
+
+										@include border-radius(8px);
+									}
+									&:hover {
+										background-color: transparent;
+									}
 								}
 							}
 						}
@@ -679,15 +905,6 @@
 						@include clearfix;
 					}
 					.row2 {
-						position: relative;
-						padding-bottom: 20px;
-
-						.button-group {
-
-						}
-
-					}
-					.row3 {
 						@import "modules/sliders";
 
 						.slider-group {
@@ -716,11 +933,40 @@
 							}
 						}
 					}
+					.row3 {
+						position: relative;
+						padding-bottom: 20px;
+
+						.button {
+							position: relative;
+							float: right;
+							padding: 12px 14px;
+							border: 1px solid $blue;
+							@include border-radius(4px);
+							cursor: pointer;
+
+							@include sourcesans(600);
+							text-transform: uppercase;
+							font-size: 16px;
+							color: $blue;
+
+							&:hover {
+								background-color: $blue;
+								color: $darkgrey;
+							}
+						}
+
+					}
 				}
 			}
 		}
-		.btn {
-			margin: 100px 15px 40px;
+		.btn.disable {
+			border: 2px solid $darkgrey;
+			color: $lightblue;
+			margin: 60px 15px 0;
+		}
+		.btn.save {
+			margin: 20px 15px 40px;
 		}
 		@include clearfix;
 	}
@@ -736,8 +982,7 @@
 		}
 		@import "modules/buttons";
 		.btn {
-			margin-top: 20px;
-			margin-bottom: 0;
+			margin: 20px 18px 0;
 		}
 		.map-link {
 			display: block;
@@ -756,6 +1001,25 @@
 		}
 	}
 }
+#ajax-loader {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(15,15,15,0.9);
+	z-index: 9999;
+
+	.graphic {
+		position: absolute;
+		width: 51px;
+		height: 52px;
+		left: 49.5555%;
+		top: 49.5555%;
+
+		@include retina(ajax_loader, gif, 51px, 52px);
+	}
+}
 .share-overlay {
 	position: absolute;
 	display: none;
@@ -764,7 +1028,7 @@
 	left: 0;
 	top: 0;
 	background-color: rgba(15,15,15,0.9);
-	z-index: 20;
+	z-index: 9999;
 
 	.container {
 		top: 30%;

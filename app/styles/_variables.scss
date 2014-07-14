@@ -14,6 +14,51 @@ $green: #1daf95;
 	font-weight: $weight;
 }
 
+@mixin questrial {
+	font-family: 'Questrial', sans-serif;
+	font-weight: 400;
+}
+
+@mixin permanent-marker {
+	font-family: 'Permanent Marker', cursive;
+	font-weight: 400;
+}
+
+@mixin playfair-display($weight: 400) {
+	font-family: 'Playfair Display', serif;
+	font-weight: $weight;
+}
+
+@mixin lobster {
+	font-family: 'Lobster', cursive;
+	font-weight: 400;
+}
+
+@mixin rokkitt($weight: 400) {
+	font-family: 'Rokkitt', serif;
+	font-weight: $weight;
+}
+
+@mixin yanone-kaffeesatz($weight: 400) {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-weight: $weight;
+}
+
+@mixin indie-flower {
+	font-family: 'Indie Flower', cursive;
+	font-weight: 400;
+}
+
+@mixin special-elite {
+	font-family: 'Special Elite', cursive;
+	font-weight: 400;
+}
+
+@mixin changa-one {
+	font-family: 'Changa One', cursive;
+	font-weight: 400;
+}
+
 // MIXINS
 @mixin transition($target: all, $time: 0.4s, $ease: ease) {
 	-webkit-transition: $target $time $ease;

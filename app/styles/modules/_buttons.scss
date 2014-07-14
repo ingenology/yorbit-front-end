@@ -6,9 +6,10 @@
 	@include border-radius(6px);
 	cursor: pointer;
 	background-color: $grey;
+	color: $lightblue;
 	background-repeat: no-repeat;
 	background-position: right center;
-	@include retina(button_arrow, png);
+	@include retina(button_arrow, png, 65px, 40px);
 
 	@include sourcesans(600);
 	text-transform: uppercase;
@@ -24,6 +25,7 @@
 	&.btn-primary {
 		background-color: #1d5baf;
 		color: $lightblue;
+		border: 0;
 
 		&:hover {
 			background-color: darken(#1d5baf, 10%);
@@ -36,6 +38,11 @@
 	}
 	&.btn-large {
 		padding-right: 200px;
+	}
+	&.btn-small {
+		padding: 12px 18px;
+		font-size: 16px;
+		background-image: none;
 	}
 	&.btn-skinny {
 		padding-top: 18px;
@@ -50,6 +57,9 @@
 	}
 	&.btn-block {
 		display: block;
+	}
+	&.disabled {
+		background-color: darken($grey, 25%);
 	}
 }
 a.btn {
