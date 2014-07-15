@@ -1085,3 +1085,43 @@
 	border: 0;
 	max-width: none;
 }
+
+/* DEVICE DISCLAIMER */
+.disclaimer {
+	display: none;
+
+	.container {
+		width: auto;
+		margin-right: auto;
+		margin-left: auto;
+		padding-left: 15px;
+		padding-right: 15px;
+
+		.logo {
+			position: relative;
+			display: block;
+			padding: 20px 0;
+		}
+		h2 {
+			@include sourcesans(400);
+			color: $lightblue;
+			font-size: 30px;
+			line-height: 130%;
+			margin-bottom: 30px;
+		}
+		.btn {
+			width: 150px;
+		}
+	}
+}
+
+@media only screen and (max-width: 963px) {
+
+	.disclaimer {
+		display: block;
+	}
+	.yorbit-application {
+		display: none;
+	}
+
+}
