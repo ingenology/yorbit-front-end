@@ -149,9 +149,13 @@ $('#add_text').click(function() {
 	} else {
 		number = Number(number) + Number(1);
 
+		$('#messageIn').val('');
 		$('#map-content .text-item').removeClass('active');
 		$('#map-content').append('<div class="text-item ui-draggable" id="text' + number + '" style="color: ' + color + '; font-weight: ' + fontWeight + '; font-style: ' + fontStyle +'; font-size: ' + typeSize + '; font-family: ' + fontFamily + '"><span>' + text +'</span><div class="delete"></div></div>');
-		$('#messageIn').val('');
+
+		// MAKES OBJECT DRAGGABLE
+		$('#text' + number).draggable();
+
 		$('.application .tools .item.type .bar_slider').slider('value', '60');
 	}
 	if ($('#disable-canvas').hasClass('disabled')) {
@@ -225,11 +229,6 @@ $('#messageIn').keyup(function() {
 		$('#disable-canvas').html('Hide Canvas');
 		$('#map-content').fadeIn(150);
 	}
-});
-
-//TOGGLE ACTIVE TEXT
-$('#map-content').on('mousedown', '.text-item', function() {
-	$(this).draggable();
 });
 
 $('#map-content').on('click', '.text-item', function() {
@@ -355,6 +354,10 @@ $('#add_square').click(function() {
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
 	$('#messageIn').val('');
 	$('#map-content').append('<div class="square-item shape ui-draggable" id="square' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
+
+	// MAKES OBJECT DRAGGABLE
+	$('#square' + number).draggable();
+	
 	if ($('#disable-canvas').hasClass('disabled')) {
 		$('#disable-canvas').removeClass('disabled');
 		$('#disable-canvas').html('Hide Canvas');
@@ -370,16 +373,15 @@ $('#add_circle').click(function() {
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
 	$('#messageIn').val('');
 	$('#map-content').append('<div class="circle-item shape ui-draggable" id="circle' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
+	
+	// MAKES OBJECT DRAGGABLE
+	$('#circle' + number).draggable();
+
 	if ($('#disable-canvas').hasClass('disabled')) {
 		$('#disable-canvas').removeClass('disabled');
 		$('#disable-canvas').html('Hide Canvas');
 		$('#map-content').fadeIn(150);
 	}
-});
-
-//TOGGLE ACTIVE SHAPE
-$('#map-content').on('mousedown', '.shape', function() {
-	$(this).draggable();
 });
 
 $('#map-content').on('click', '.shape', function() {
