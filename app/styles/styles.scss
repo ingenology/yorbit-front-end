@@ -99,6 +99,8 @@ body {
         position: relative;
         width: 964px;
         margin: 0 auto;
+
+        @include clearfix;
     }
     header {
         position: relative;
@@ -135,8 +137,8 @@ body {
 /* NAVIGATION */
 @import "modules/navigation";
 
-/* LANDING PAGE */
-@import "landing-page";
+/* HOME PAGE */
+@import "home-page";
 
 /* APP */
 @import "app";

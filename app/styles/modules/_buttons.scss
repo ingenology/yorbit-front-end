@@ -32,8 +32,26 @@
 		}
 		&:focus {
 			background-color: darken(#1d5baf, 20%);
-
 			color: darken($lightblue, 10%);
+		}
+	}
+	&.btn-transparent {
+		background-color: #13171d;
+		background-color: rgba(19,23,29,.27);
+		@include retina(button_arrow_blue, png, 48px, 32px);
+		border: 2px solid $lightblue;
+		color: $lightblue;
+
+		&:hover {
+			background-color: darken(#13171d, 10%);
+			background-color: rgba(19,23,29,.6);
+			color: darken($lightblue, 20%);
+			border-color: darken($lightblue, 20%);
+		}
+		&:focus {
+			background-color: darken(#13171d, 20%);
+			background-color: rgba(19,23,29,.7);
+			color: darken($lightblue, 30%);
 		}
 	}
 	&.btn-large {
