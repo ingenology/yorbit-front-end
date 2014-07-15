@@ -250,6 +250,7 @@ $('#map-content').on('click', '.text-item', function() {
 
 //DELETE TEXT ITEM
 $('#map-content').on('click', '.text-item .delete', function() {
+	$('#messageIn').val('');
 	$(this).parent().fadeOut(150, function() {
 		$(this).remove();
 	});
@@ -352,6 +353,7 @@ $('#add_square').click(function() {
 	var backgroundColor = $('#shape_color_picker').spectrum('get');
 	number = Number(number) + Number(1);
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
+	$('#messageIn').val('');
 	$('#map-content').append('<div class="square-item shape ui-draggable" id="square' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
 	if ($('#disable-canvas').hasClass('disabled')) {
 		$('#disable-canvas').removeClass('disabled');
@@ -366,6 +368,7 @@ $('#add_circle').click(function() {
 	var backgroundColor = $('#shape_color_picker').spectrum('get');
 	number = Number(number) + Number(1);
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
+	$('#messageIn').val('');
 	$('#map-content').append('<div class="circle-item shape ui-draggable" id="circle' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
 	if ($('#disable-canvas').hasClass('disabled')) {
 		$('#disable-canvas').removeClass('disabled');
@@ -380,6 +383,7 @@ $('#map-content').on('mousedown', '.shape', function() {
 });
 
 $('#map-content').on('click', '.shape', function() {
+	$('#messageIn').val('');
 	if ($(this).hasClass('active')) {
 		$(this).removeClass('active');
 		$('.application .tools .item.objects .bar_sliderW').slider('value', '100');
@@ -397,6 +401,7 @@ $('#map-content').on('click', '.shape', function() {
 });
 
 $('#map-content').on('click', '.shape .delete', function() {
+	$('#messageIn').val('');
 	$(this).parent().fadeOut(150, function() {
 		$(this).remove();
 	});
@@ -404,6 +409,7 @@ $('#map-content').on('click', '.shape .delete', function() {
 
 $('#delete_shape').click(function() {
 	$('#map-content .shape.active').remove();
+	$('#messageIn').val('');
 	if ($('#disable-canvas').hasClass('disabled')) {
 		$('#disable-canvas').removeClass('disabled');
 		$('#disable-canvas').html('Hide Canvas');
@@ -430,6 +436,7 @@ $(function() {
 function patternSet(patternClass) {
 	var opacity = $('.application .tools .item.patterns .bar_slider').slider('value');
 	opacity = opacity / 100;
+	$('#messageIn').val('');
 	$('#map-content .pattern').remove();
 	$('#map-content').append('<div class="pattern ' + patternClass + '"></div>');
 	$('#map-content .pattern').fadeTo(150, opacity);
@@ -451,6 +458,7 @@ $('.application .tools .item.patterns .square.stripes').click(function() {
 });
 
 $('#delete-pattern').click(function() {
+	$('#messageIn').val('');
 	$('#map-content .pattern').fadeOut(150, function() {
 		$('#map-content .pattern').remove();
 		$('.application .tools .item.patterns .bar_slider').slider('value', 50);
