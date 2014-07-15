@@ -59,14 +59,6 @@ $('#modal1 .btn').click(function() {
 	
 	var dateStripped = fullDate.getFullYear() + twoDigitMonth + fullDate.getDate();
 	var valueStripped = value.replace(/\-/g,'');
-
-	/*
-	if (value === '') {
-		alert('Hey, select a date.');
-	} else if (valueStripped >= dateStripped) {
-		alert('Hey, select a date that is not in the future.');
-	}
-	*/
 });
 
 /*****************************************
