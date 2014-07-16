@@ -526,7 +526,7 @@ function renderMap(latitude, longitude) {
 }
 
 // MAP SCRIPTS
-$(document).ready(function() {
+$(window).load(function() {
 	if ($('body').hasClass('create')) {
 		var modifiedMapLocation = encodeURIComponent(mapLocation);
 		var latitude,
@@ -539,8 +539,8 @@ $(document).ready(function() {
 	        dataType: 'json',
 			success : function(data) {
 		        console.log(data);
-		        latitude = data.results[1].geometry.location.lat;
-		        longitude = data.results[1].geometry.location.lng;
+		        latitude = data.results[0].geometry.location.lat;
+		        longitude = data.results[0].geometry.location.lng;
 
 		        renderMap(latitude, longitude);
 		        $('#ajax-loader').fadeOut(150);
@@ -572,7 +572,7 @@ $(document).ready(function() {
 		    $('#imgZoom').val(zoom);
 		    $('#imgCent').val(map.center);
 		    
-		    return urlIn + '/default/' + dateIn + '/' +
+		    return urlIn + '/default/' + mapDate + '/' +
 		        googleLevel + '/' +
 		        zoom + '/' + tile.y + '/' +
 		        tile.x + '.jpg';
