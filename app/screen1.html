@@ -57,30 +57,54 @@
         </header>
         <div class="container yorbit-application">
             <div class="modal" id="modal1">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                <label class="control-label" for="address">Location</label>
-                <input type="text" class="location" id="location" name="address" placeholder="Kansas City" />
-                <label class="control-label" for="date">Date</label>
-                <input type="text" class="date" id="dateIn" name="dateIn" placeholder="2014-04-10" />
-                <div class="button-group map-type">
-                    <p>Seach maps by the following</p>
-                    <div class="button first" data="3">
-                        Thermal
+                <p>Enter the name of a city, or a zip code followed the date and type of map that you would like to use.</p>
+                <form id="search-form">
+                    <input type="hidden" name="latitude" id="search-latitude" />
+                    <input type="hidden" name="longitude" id="search-longitude" />
+                    <label class="control-label" for="address">Location</label>
+                    <input type="text" class="location" id="location" name="address" placeholder="Kansas City" />
+                    <label class="control-label" for="date">Date</label>
+                    <input type="text" class="date" id="dateIn" name="dateIn" placeholder="2014-04-10" />
+                    <div class="button-group map-type">
+                        <p>Seach maps by the following</p>
+                        <div class="button first" data="3">
+                            Thermal
+                        </div>
+                        <div class="button" data="2">
+                            Night
+                        </div>
+                        <div class="button last active" data="1">
+                            Geo
+                        </div>
                     </div>
-                    <div class="button" data="2">
-                        Night
+                    <select class="hidden" id="mapType" name="mapType">
+                        <option value="1" selected>CorrectedReflectance_TrueColor</option>
+                        <option value="2">City Lights</option>
+                        <option value="3">MODIS_Aqua_SurfaceReflectance_Bands121</option>
+                    </select>
+                    <div class="btn btn-primary btn-large pull-right" id="map-search">Proceed</div>
+                    <div class="clear"></div>
+                </form>
+            </div>
+        </div>
+        <div id="ajax-loader" style="display: none;">
+            <div class="graphic"></div>
+        </div>
+        <div id="search-overlay">
+            <div class="modal-container">
+                <h2>Location search results:</h2>
+                <p>We were able to find more than one result for the location that you searched. Please select below the location that you were want. If it does not appear, please search again.</p>
+                <div class="results">
+                    <!--
+                    <div class="result" latitude="64.2008413" longitude="-149.4936733">
+                        <h3>Paris</h3>
+                        <p>Paris, France</p>
                     </div>
-                    <div class="button last active" data="1">
-                        Geo
-                    </div>
+                    -->
                 </div>
-                <select class="hidden" id="mapType" name="mapType">
-                    <option value="1" selected>CorrectedReflectance_TrueColor</option>
-                    <option value="2">City Lights</option>
-                    <option value="3">MODIS_Aqua_SurfaceReflectance_Bands121</option>
-                </select>
-                <div class="btn btn-primary btn-large pull-right">Proceed</div>
-                <div class="clear"></div>
+                <div class="btn btn-small search-again">
+                    Search again
+                </div>
             </div>
         </div>
 

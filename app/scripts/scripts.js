@@ -52,13 +52,86 @@ $('.map-type .button').click(function() {
 	$(this).addClass('active');
 });
 
-$('#modal1 .btn').click(function() {
-	var value = $('#dateIn').val();
-	var fullDate = new Date();
-	var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+$('#search-overlay .btn.search-again').click(function() {
+	$('#search-overlay').fadeOut(150, function() {
+		$('#search-overlay .results').html('');
+		$('#location').val();
+	});
+});
+
+// SHOW LOCATION LIST MODAL
+function showResults(arrayData) {
+	$.each(arrayData, function(index, result) {
+		$('#search-overlay .results').append('<div class="result" latitude="' + result.geometry.location.lat +'" longitude="' + result.geometry.location.lng +'"><h3>' + result.address_components[0].long_name + '</h3><p>' + result.formatted_address + '</p></div>');
+	});
+	$('#ajax-loader').fadeOut(150);
+	$('#search-overlay').fadeIn(150);
+}
+
+$('#map-search').click(function() {
+	var mapLocation = $('#location').val(),
+		date = $('#dateIn').val();
+	var modifiedMapLocation = encodeURIComponent(mapLocation),
+		latitude,
+		longitude;
+
+	if (mapLocation === '') {
+		$('body').prepend('<div class="notification warning"><div class="container"><div class="title">Error</div><div class="message">Please enter a location that you would like to include in your map.</div></div></div>');
+		setTimeout(function(){
+			$('.notification').animate({
+				'opacity': '0',
+				'top': '-100px'
+			}, 400, function() {
+				$('.notification').remove();
+			});
+		}, 3000);
+	} else if (date === '') {
+		$('body').prepend('<div class="notification warning"><div class="container"><div class="title">Error</div><div class="message">Please select a date for your map.</div></div></div>');
+		setTimeout(function(){
+			$('.notification').animate({
+				'opacity': '0',
+				'top': '-100px'
+			}, 400, function() {
+				$('.notification').remove();
+			});
+		}, 3000);
+	} else {
+		$('#ajax-loader').fadeIn(150);
 	
-	var dateStripped = fullDate.getFullYear() + twoDigitMonth + fullDate.getDate();
-	var valueStripped = value.replace(/\-/g,'');
+		$.ajax({
+			url: 'http://maps.google.com/maps/api/geocode/json?sensor=true&address=' + modifiedMapLocation,
+			cache: false,
+	        crossDomain: true,
+	        dataType: 'json',
+			success : function(data) {
+		        console.log(data);
+		        var arrayLength = data.results.length;
+		        if (arrayLength > 1) {
+					showResults(data.results);
+		        } else {
+					latitude = data.results[0].geometry.location.lat;
+			        longitude = data.results[0].geometry.location.lng;
+
+			        $('#search-latitude').val(latitude);
+			        $('#search-longitude').val(longitude);
+			        $('#ajax-loader').fadeOut(150, function() {
+			        	$('#search-form').submit();
+			        });
+		        }
+		    }
+		});
+	}
+});
+
+$('#search-overlay').on('click', '.result', function() {
+	var latitude = $(this).attr('latitude');
+	var longitude = $(this).attr('longitude');
+
+	$('#search-latitude').val(latitude);
+    $('#search-longitude').val(longitude);
+    $('#ajax-loader').fadeOut(150, function() {
+    	$('#search-form').submit();
+    });
 });
 
 /*****************************************
@@ -527,25 +600,10 @@ function renderMap(latitude, longitude) {
 
 // MAP SCRIPTS
 $(window).load(function() {
+	
 	if ($('body').hasClass('create')) {
-		var modifiedMapLocation = encodeURIComponent(mapLocation);
-		var latitude,
-			longitude;
-		
-		$.ajax({
-			url: 'http://maps.google.com/maps/api/geocode/json?sensor=true&address=' + modifiedMapLocation,
-			cache: false,
-	        crossDomain: true,
-	        dataType: 'json',
-			success : function(data) {
-		        console.log(data);
-		        latitude = data.results[0].geometry.location.lat;
-		        longitude = data.results[0].geometry.location.lng;
-
-		        renderMap(latitude, longitude);
-		        $('#ajax-loader').fadeOut(150);
-		    }
-		});
+		renderMap(mapLatitude, mapLongitude);
+		$('#ajax-loader').fadeOut(150);
 	}
 	if ($('body').hasClass('share')) {
 

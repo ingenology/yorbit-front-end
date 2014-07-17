@@ -1020,6 +1020,82 @@
 		@include retina(ajax_loader, gif, 51px, 52px);
 	}
 }
+#search-overlay {
+	position: absolute;
+	display: none;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(15,15,15,0.9);
+	z-index: 9999;
+
+	.modal-container {
+		position: relative;
+		width: 700px;
+		background: $darkblue;
+		margin: 0 auto;
+		padding: 40px;
+		top: 7%;
+
+		h2 {
+			display: inline-block;
+			margin-bottom: 20px;
+
+			@include sourcesans(400);
+			color: $green;
+			font-size: 32px;
+		}
+		p {
+			@include sourcesans(200);
+			color: $blue;
+			font-size: 18px;
+			line-height: 140%;
+		}
+		.results {
+			position: relative;
+			margin-top: 40px;
+
+			@include clearfix;
+
+			.result {
+				position: relative;
+				width: 250px;
+				padding: 20px 15px;
+				margin: 0 20px 20px 0;
+				float: left;
+				background-color: $darkgrey;
+				cursor: pointer;
+
+				&:hover {
+					background-color: darken($darkgrey, 5%);
+				}
+
+				h3 {
+					display: block;
+					margin-bottom: 8px;
+
+					@include sourcesans(300);
+					color: $lightblue;
+					font-size: 26px;
+				}
+				p {
+					@include sourcesans(200);
+					color: $blue;
+					font-size: 18px;
+					line-height: 140%;
+				}
+			}
+		}
+		.btn {
+			display: block;
+			position: relative;
+			width: 120px;
+			text-align: center;
+			margin: 20px auto 0;
+		}
+	}
+}
 .share-overlay {
 	position: absolute;
 	display: none;
