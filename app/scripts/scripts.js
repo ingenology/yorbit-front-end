@@ -55,7 +55,7 @@ $('.map-type .button').click(function() {
 $('#search-overlay .btn.search-again').click(function() {
 	$('#search-overlay').fadeOut(150, function() {
 		$('#search-overlay .results').html('');
-		$('#location').val();
+		$('#location').val('');
 	});
 });
 
