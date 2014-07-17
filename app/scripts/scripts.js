@@ -5,8 +5,8 @@ var date,
 	typeSize = '60px',
 	shapeWidth,
 	shapeHeight,
-	shapeScale,
 	globalFontStyle,
+	typeFace,
 	mapContent;
 
 /*****************************************
@@ -114,9 +114,7 @@ $('#map-search').click(function() {
 
 			        $('#search-latitude').val(latitude);
 			        $('#search-longitude').val(longitude);
-			        $('#ajax-loader').fadeOut(150, function() {
-			        	$('#search-form').submit();
-			        });
+			        $('#search-form').submit();
 		        }
 		    }
 		});
@@ -224,7 +222,7 @@ $('#add_text').click(function() {
 
 		$('#messageIn').val('');
 		$('#map-content .text-item').removeClass('active');
-		$('#map-content').append('<div class="text-item ui-draggable" id="text' + number + '" style="color: ' + color + '; font-weight: ' + fontWeight + '; font-style: ' + fontStyle +'; font-size: ' + typeSize + '; font-family: ' + fontFamily + '"><span>' + text +'</span><div class="delete"></div></div>');
+		$('#map-content').append('<div class="text-item ui-draggable active" id="text' + number + '" style="color: ' + color + '; font-weight: ' + fontWeight + '; font-style: ' + fontStyle +'; font-size: ' + typeSize + '; font-family: ' + fontFamily + '"><span>' + text +'</span><div class="delete"></div></div>');
 
 		// MAKES OBJECT DRAGGABLE
 		$('#text' + number).draggable();
@@ -316,6 +314,8 @@ $('#map-content').on('click', '.text-item', function() {
 		$(this).addClass('active');
 		typeSize = $(this).css('font-size');
 		typeSize = typeSize.slice(0, - 2);
+		typeFace = $(this).css('font-family');
+		$('#font-select').val(typeFace);
 		$('.application .tools .item.type .bar_slider').slider('value', typeSize);
 	}
 });
@@ -426,7 +426,7 @@ $('#add_square').click(function() {
 	number = Number(number) + Number(1);
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
 	$('#messageIn').val('');
-	$('#map-content').append('<div class="square-item shape ui-draggable" id="square' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
+	$('#map-content').append('<div class="square-item shape ui-draggable active" id="square' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
 
 	// MAKES OBJECT DRAGGABLE
 	$('#square' + number).draggable();
@@ -445,7 +445,7 @@ $('#add_circle').click(function() {
 	number = Number(number) + Number(1);
 	$('#map-content .text-item, #map-content .shape').removeClass('active');
 	$('#messageIn').val('');
-	$('#map-content').append('<div class="circle-item shape ui-draggable" id="circle' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
+	$('#map-content').append('<div class="circle-item shape ui-draggable active" id="circle' + number + '" style="background-color: ' + backgroundColor + ';"><div class="delete"></div></div>');
 	
 	// MAKES OBJECT DRAGGABLE
 	$('#circle' + number).draggable();
