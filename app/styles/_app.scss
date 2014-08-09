@@ -294,13 +294,19 @@
 					//cursor: all-scroll;
 					border: 1px solid $lightblue;
 					padding: 0;
+
+					.delete {
+						display: block;
+					}
 				}
+				/*
 				&:hover {
 
 					.delete {
 						display: block;
 					}
 				}
+				*/
 			}
 			.square-item, .circle-item {
 				position: absolute;
@@ -331,13 +337,19 @@
 					//cursor: all-scroll;
 					border: 1px solid $lightblue;
 					padding: 0;
+
+					.delete {
+						display: block;
+					}
 				}
+				/*
 				&:hover {
 
 					.delete {
 						display: block;
 					}
 				}
+				*/
 			}
 			.circle-item {
 				@include border-radius(50px);
