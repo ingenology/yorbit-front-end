@@ -34,7 +34,9 @@
     </head>
     <body class="create">
         <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <div class="browser-check">
+                You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+            </div>
         <![endif]-->
         <header class="yorbit-application">
             <div class="container">
@@ -203,6 +205,18 @@
                     Go Back
                 </a>
             </div>
+        </div>
+
+        <div class="overlay overlay-door yorbit-application">
+            <div class="close_button">
+                <a href="#" class="close_navigation overlay-close" onclick="return false;">X</a>
+            </div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/screen2.html">Create a Map</a></li>
+                </ul>
+            </nav>
         </div>
 
         <script type="text/javascript">

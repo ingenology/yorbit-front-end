@@ -1,5 +1,28 @@
 @import "modules/datepicker";
 
+/* BROWSER CHECK */
+.browser-check {
+	position: relative;
+	padding: 20px;
+	background-color: $green;
+
+	@include sourcesans(400);
+	color: white;
+	text-align: center;
+
+	strong {
+		@include sourcesans(600);
+	}
+	a {
+		color: $blue;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 /* MODAL */
 .modal {
 	position: relative;
